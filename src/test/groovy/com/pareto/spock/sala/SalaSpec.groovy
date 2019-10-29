@@ -1,6 +1,5 @@
-package com.pareto.spock.domain
+package com.pareto.spock.sala
 
-import com.pareto.spock.equipamento.Equipamento
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -9,9 +8,9 @@ import static com.pareto.spock.helpers.SpecHelper.gerarDouble
 import static com.pareto.spock.helpers.SpecHelper.gerarId
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric
 
-class EquipamentoSpec extends Specification {
+class SalaSpec extends Specification {
 
-    def domain = new Equipamento()
+    def domain = new Sala()
 
     @Unroll
     def 'Testa constraints do campo #campo para o valor #valor'() {
@@ -22,31 +21,35 @@ class EquipamentoSpec extends Specification {
         assertValidationError(domain, "$campo", "$erroValidation")
 
         where:
-        campo          | valor || erroValidation
-        'idHotel'      | null  || NOT_NULL
-        'nome'         | null  || NOT_BLANK
-        'nome'         | ""    || NOT_BLANK
-        'nome'         | " "   || NOT_BLANK
-        'valorLocacao' | null  || NOT_NULL
+        campo  | valor || erroValidation
+        'nome' | null  || NOT_BLANK
+        'nome' | ""    || NOT_BLANK
+        'nome' | " "   || NOT_BLANK
     }
 
     def 'Domínio válido'() {
         setup:
         def id = gerarId()
-        def idHotel = gerarId()
+        def pai = Stub(Sala)
         def nome = randomAlphanumeric(10)
         def descricao = randomAlphanumeric(10)
 
+        def largura = gerarDouble()
+        def comprimento = gerarDouble()
+        def altura = gerarDouble()
+
         when:
-        def equipamento = new Equipamento(
+        def salao = new Sala(
                 id: id,
-                idHotel: idHotel,
+                pai: pai,
                 nome: nome,
                 descricao: descricao,
-                valorLocacao: gerarDouble()
+                largura: largura,
+                comprimento: comprimento,
+                altura: altura
         )
 
         then: 'Não há erros de validação'
-        assertValidationHasNoErrors(equipamento)
+        assertValidationHasNoErrors(salao)
     }
 }

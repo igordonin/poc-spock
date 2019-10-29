@@ -1,6 +1,5 @@
-package com.pareto.spock.domain
+package com.pareto.spock.web
 
-import com.pareto.spock.web.Rota
 import spock.lang.Specification
 import spock.lang.Unroll
 

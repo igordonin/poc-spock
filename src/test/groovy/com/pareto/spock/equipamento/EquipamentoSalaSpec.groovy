@@ -1,7 +1,5 @@
-package com.pareto.spock.domain
+package com.pareto.spock.equipamento
 
-import com.pareto.spock.equipamento.Equipamento
-import com.pareto.spock.equipamento.EquipamentoSala
 import com.pareto.spock.sala.Sala
 import spock.lang.Specification
 import spock.lang.Unroll
