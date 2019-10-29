@@ -1,0 +1,17 @@
+# Routing
+server.port: 8090
+
+spring:
+  application.name: unit-test-spock
+  data.rest.base-path: /api
+  # JPA
+  jpa:
+    hibernate.naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties.hibernate.dialect: org.hibernate.dialect.Oracle10gDialect
+    show-sql: false
+
+---
+
+spring:
+  profiles: desenvolvimento, dev
+  jpa.show-sql: true

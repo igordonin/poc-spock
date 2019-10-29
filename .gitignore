@@ -1,0 +1,30 @@
+#WebApp Generated Files
+out/
+src/main/resources/static/**
+
+#OS junk files
+[Tt]humbs.db
+*.DS_Store
+
+#Java generated files
+*.class
+
+#Project files
+[Bb]in
+[Bb]uild
+.gradle
+
+#Specific Files
+
+
+#Subversion files
+.svn
+
+#IDE files
+*.idea
+*.iml
+*.ipr
+*.iws
+
+# Office Temp Files
+~$*

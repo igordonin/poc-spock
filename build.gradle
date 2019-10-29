@@ -1,0 +1,79 @@
+import static org.apache.tools.ant.taskdefs.condition.Os.*
+
+buildscript {
+    ext {
+        springBootVersion = '2.0.1.RELEASE'
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://repo.spring.io/milestone' }
+        maven { url 'https://repo.spring.io/release' }
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.pareto'
+version '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+bootJar {
+    launchScript()
+}
+
+sourceSets.main.java.srcDirs = []
+sourceSets.main.groovy.srcDirs = ['src/main/groovy', 'src/main/java']
+sourceSets.main.resources.srcDirs = ['src/main/resources']
+
+repositories {
+    mavenCentral()
+    maven { url 'http://repo.spring.io/libs-snapshot' }
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy'
+
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'org.springframework.boot:spring-boot-starter-data-rest'
+    compile 'org.springframework.boot:spring-boot-devtools'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+
+    compile 'org.springframework.data:spring-data-mongodb'
+
+    compile 'org.springframework:spring-aspects:3.2.4.RELEASE'
+
+    compile 'org.projectlombok:lombok:1.16.16'
+    compile 'javax.inject:javax.inject:1'
+    compile 'org.apache.tomcat.embed:tomcat-embed-el'
+    compile 'org.slf4j:slf4j-api:1.7.13'
+
+    compile 'org.apache.commons:commons-lang3:3.7'
+
+    runtime 'mysql:mysql-connector-java'
+    runtime 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+    testCompile 'org.springframework.security:spring-security-test'
+
+    testCompile 'junit:junit:4.12'
+
+    testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
+    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+    testCompile 'cglib:cglib-nodep:3.2.6'
+}
+
+tasks.idea {
+    dependsOn = [cleanIdeaModule, ideaModule]
+}
