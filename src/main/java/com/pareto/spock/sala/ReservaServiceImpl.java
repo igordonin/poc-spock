@@ -2,6 +2,7 @@ package com.pareto.spock.sala;
 
 import com.pareto.spock.cliente.Cliente;
 import com.pareto.spock.core.CrudBasicoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
@@ -14,6 +15,7 @@ public class ReservaServiceImpl
 
     private ReservaRepository reservaRepository;
 
+    @Autowired
     public ReservaServiceImpl(ReservaRepository reservaRepository) {
         super(reservaRepository);
 
